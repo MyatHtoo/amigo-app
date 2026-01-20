@@ -34,14 +34,14 @@ export default function Input({
       {/* Input */}
       <TextInput
         className={clsx(
-          "h-12 border rounded-xl bg-white text-black pr-4",
+          "h-16 border rounded-xl bg-white text-black pr-4",
           icon ? "pl-12" : "pl-4",
           size === "lg" && "w-full",
           size === "md" && "w-1/2",
           size === "sm" && "w-1/3",
 
-          variant === "primary" && "bg-primary",
-          variant === "secondary" && "bg-secondary border border-gray-300"
+          variant === "primary" && "border border-primary",
+          variant === "secondary" && "border border-gray-300"
         )}
         placeholderTextColor="#9CA3AF"
         {...props}

@@ -1,14 +1,34 @@
-import { View, Image, Dimensions } from "react-native";
+import { View, Image, Text, Dimensions } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 
 const width = Dimensions.get("window").width;
 
-const images = [
-   require("../../assets/images/StepOne.jpg"),
-  require("../../assets/images/StepTwo.jpg"),
-  require("../../assets/images/StepThree.jpeg"),
-  require("../../assets/images/StepFour.png"),
-  require("../../assets/images/StepFive.jpg"),
+const slides = [
+  {
+    image: require("../../assets/images/StepOne.jpg"),
+    title : "AI Itinerary",
+    quote: "Plan your journey smarter with intelligent travel assistance.",
+  },
+  {
+    image: require("../../assets/images/StepTwo.jpg"),
+    title:"Smart Travel Planner",
+    quote: "Let AI design your perfect trip in minutes.",
+  },
+  {
+    image: require("../../assets/images/StepThree.jpeg"),
+    title:"Your Personal Guide",
+    quote: "Create seamless trips without the stress of planning.",
+  },
+  {
+    image: require("../../assets/images/StepFour.png"),
+    title:"Smart Travel Planner",
+    quote: "Let AI design your perfect trip in minutes.",
+  },
+  {
+    image: require("../../assets/images/StepFive.jpg"),
+    title:"Travel with AI",
+    quote: "Turn your dream destinations into real plans.",
+  },
 ];
 
 export default function ImageSlider() {
@@ -16,17 +36,53 @@ export default function ImageSlider() {
     <View>
       <Carousel
         width={width}
-        height={200}
+        height={250}
         autoPlay
         autoPlayInterval={3000}
-        data={images}
+        data={slides}
         scrollAnimationDuration={800}
         renderItem={({ item }) => (
-          <Image
-            source={item}
-            style={{ width, height: 200, borderRadius: 16 }}
-            resizeMode="cover"
-          />
+          <View style={{ width, height: 250 }}>
+            {/* Background Image */}
+            <Image
+              source={item.image}
+              style={{ width, height: 250, position: "absolute" }}
+              resizeMode="cover"
+            />
+
+            {/* Center Quote */}
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "rgba(0,0,0,0.25)", 
+              }}
+            >
+                <Text
+                style={{
+                  color: "white",
+                  fontSize: 26,
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  marginBottom: 8,
+                }}
+              >
+                {item.title}
+              </Text>
+
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 14,
+                  textAlign: "center",
+                  lineHeight: 20,
+                }}
+              >
+                {item.quote}
+              </Text>
+            </View>
+          </View>
         )}
       />
     </View>

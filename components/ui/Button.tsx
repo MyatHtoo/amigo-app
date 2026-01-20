@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import clsx from "clsx";
 
@@ -22,7 +22,7 @@ export default function Button({
   iconSize = 25,
 }: Props) {
   return (
-    <Pressable
+    <TouchableOpacity
       onPress={onPress}
       className={clsx(
         "h-16 rounded-xl flex-row items-center justify-center gap-2",
@@ -32,7 +32,7 @@ export default function Button({
         size === "sm" && "w-1/3",
 
         variant === "primary" && "bg-primary",
-        variant === "secondary" && "bg-secondary border border-gray-300"
+        variant === "secondary" && "bg-secondary border border-primary"
       )}
     >
 
@@ -58,6 +58,6 @@ export default function Button({
           color={iconColor}
         />
       )}
-    </Pressable>
+    </TouchableOpacity>
   );
 }
