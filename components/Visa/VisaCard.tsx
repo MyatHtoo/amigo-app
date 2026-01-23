@@ -7,7 +7,7 @@ type Props = {
 
 export default function VisaCard({ visa }: Props) {
   return (
-    <View className="p-4 bg-white shadow-sm rounded-2xl">
+    <View className="p-4 mt-2 bg-blue-100 shadow-sm rounded-2xl">
       <Text className="mb-2 text-lg font-semibold">Visa Requirements</Text>
 
       <View className="flex-row justify-between mb-1">

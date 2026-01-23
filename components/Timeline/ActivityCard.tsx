@@ -1,15 +1,17 @@
-import { View, Text, Pressable, Linking } from "react-native";
+import { View, Text, Pressable, Linking, TouchableOpacity } from "react-native";
 import ImageCarousel from "./ImageCarousel";
+import { MaterialIcons } from "@expo/vector-icons";
 
 type Props = {
   activity: any;
   youtubeLink?: string;
+  setOpen?: (open: boolean) => void;
 };
 
-export default function ActivityCard({ activity, youtubeLink }: Props) {
+export default function ActivityCard({ activity, youtubeLink, setOpen }: Props) {
   return (
     <View className="flex-1 p-4 bg-white border border-gray-200 shadow-sm rounded-2xl">
-      
+
       {/* Image Carousel */}
       <ImageCarousel images={activity.activity_photos} />
 
@@ -29,16 +31,22 @@ export default function ActivityCard({ activity, youtubeLink }: Props) {
           ฿ {activity.cost_thb}
         </Text>
 
-        {youtubeLink && (
-          <Pressable
-            onPress={() => Linking.openURL(youtubeLink)}
-            className="px-3 py-1.5 bg-red-600 rounded-full"
-          >
-            <Text className="text-xs font-semibold text-white">
-              ▶ Watch Vlog
-            </Text>
-          </Pressable>
-        )}
+        <View className="flex-row items-center gap-3">
+          <TouchableOpacity onPress={() => setOpen && setOpen(true)}>
+            <MaterialIcons name="edit" size={26} color="blue" />
+          </TouchableOpacity>
+
+          {youtubeLink && (
+            <Pressable
+              onPress={() => Linking.openURL(youtubeLink)}
+              className="px-3 py-1.5 bg-red-600 rounded-full"
+            >
+              <Text className="text-xs font-semibold text-white">
+                ▶ Watch Vlog
+              </Text>
+            </Pressable>
+          )}
+        </View>
       </View>
     </View>
   );

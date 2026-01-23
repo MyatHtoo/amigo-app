@@ -1,9 +1,13 @@
 import { View, Text } from "react-native";
 import ActivityCard from "./ActivityCard";
 
-export default function DaySection({ day }: { day: any }) {
+type Props = {
+  setOpen: (open: boolean) => void;
+};
+
+export default function DaySection({ day, setOpen }: { day: any; setOpen: (open: boolean) => void } & Props) {
   return (
-    <View className="mb-1">
+    <View className="p-3 mb-1">
       {/* Day Header */}
       <View className="flex-row items-center mb-5">
         <View className="w-3 h-3 mr-3 rounded-full bg-primary" />
@@ -18,7 +22,7 @@ export default function DaySection({ day }: { day: any }) {
       {/* Activities */}
       {day.activities.map((activity: any, index: number) => (
         <View key={index} className="flex-row mb-6">
-          
+
           {/* Timeline */}
           <View className="items-center mr-4">
             <Text className="mb-1 text-xs text-gray-500">
@@ -28,6 +32,7 @@ export default function DaySection({ day }: { day: any }) {
           </View>
 
           <ActivityCard
+            setOpen={setOpen}
             activity={activity}
             youtubeLink={day.youtube_vlog_link}
           />

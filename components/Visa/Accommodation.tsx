@@ -1,5 +1,9 @@
 import { View, Text } from "react-native";
 import type { Accommodation } from "../constants/types";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import ImageCarousel from "../Timeline/ImageCarousel";
+import { MaterialIcons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 
 
 type Props = {
@@ -9,7 +13,20 @@ type Props = {
 export default function AccommodationCard({ accommodation }: Props) {
   return (
     <View className="p-4 bg-white shadow-sm rounded-2xl">
-      <Text className="mb-2 text-lg font-semibold">Accommodation</Text>
+      <View className="flex-row items-center gap-2 mb-1">
+        <View>
+          <FontAwesome name="hotel" size={20} color="blue" />
+        </View>
+
+        <View className="flex-row items-center justify-between flex-1 ">
+          <Text className="text-lg font-semibold">Accommodation</Text>
+
+          <TouchableOpacity>
+            <MaterialIcons name="edit" size={26} color="blue" />
+          </TouchableOpacity>
+        </View>
+
+      </View>
 
       <Text className="text-base font-semibold text-primary">
         {accommodation.hotel_name}
@@ -18,6 +35,8 @@ export default function AccommodationCard({ accommodation }: Props) {
       <Text className="mb-2 text-sm text-gray-600">
         {accommodation.address}
       </Text>
+
+      <ImageCarousel images={accommodation.hotel_photos} />
 
       <View className="flex-row justify-between mb-2">
         <Text>⭐ {accommodation.star_rating}-star</Text>

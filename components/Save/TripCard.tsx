@@ -3,7 +3,7 @@ import { Image } from "react-native";
 import type { UserInput } from "../constants/types";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   userInput: UserInput;
@@ -12,12 +12,12 @@ type Props = {
 export default function TripCard({
   userInput
 }: Props) {
-    
-   const [showEditTip, setShowEditTip] = useState(false);
-  const [showDeleteTip, setShowDeleteTip] = useState(false);
+  const navigation = useNavigation();
 
   return (
-    <View className="flex-row gap-2 mb-4 overflow-hidden bg-white shadow-sm rounded-2xl">
+    <TouchableOpacity onPress={() => navigation.navigate("Steps", {
+      screen: "TripDetails",
+    })} className="flex-row gap-2 mb-4 overflow-hidden bg-white shadow-sm rounded-2xl">
 
       <Image
         source={{ uri: userInput.image }}
@@ -56,13 +56,15 @@ export default function TripCard({
       </View>
 
       <View className="flex flex-row justify-between gap-2 p-3">
-       <TouchableOpacity >
-        <MaterialIcons name="edit" size={26} color="gray" />
-       </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Steps", {
+                        screen: "TripEdit",
+                    })}>
+          <MaterialIcons name="edit" size={26} color="gray" />
+        </TouchableOpacity>
         <TouchableOpacity>
-        <MaterialCommunityIcons name="delete" size={26} color="red" />
+          <MaterialCommunityIcons name="delete" size={26} color="red" />
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

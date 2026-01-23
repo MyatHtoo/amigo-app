@@ -27,17 +27,21 @@ export type VisaRequirements = {
 
 export type FlightType = "Departure" | "Return";
 
-export type Flight = {
-  type: FlightType;
-  flight_number: string;
+export type SingleFlight = {
   airline: string;
-  from: string;
-  to: string;
+  airline_logo: string;
+  flight_number: string;
+  departure_airport: string;
+  arrival_airport: string;
   departure_time: string;
   arrival_time: string;
-  estimated_cost_thb: number;
+  cost_thb: number;
 };
 
+export type FlightGroup = {
+  outbound_flight: SingleFlight;
+  return_flight: SingleFlight;
+};
 
 export type Accommodation = {
   hotel_name: string;
@@ -47,6 +51,7 @@ export type Accommodation = {
   check_in: string;
   check_out: string;
   amenities: string[];
+  hotel_photos: string[];
 };
 
 export type UserInput = {

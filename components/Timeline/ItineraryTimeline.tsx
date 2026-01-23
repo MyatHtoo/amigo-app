@@ -1,17 +1,22 @@
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import DaySection from "./DaySection";
 
-export default function ItineraryTimeline({ itinerary }: { itinerary: any[] }) {
+type Props = {
+  itinerary: any[];
+  header?: React.ReactNode;
+  setOpen: (open: boolean) => void
+};
+
+export default function ItineraryTimeline({ itinerary, header, setOpen }: Props) {
+  console.log('h',setOpen)
   return (
     <FlatList
       data={itinerary}
       keyExtractor={(item) => item.day.toString()}
-      renderItem={({ item }) => <DaySection day={item} />}
+      renderItem={({ item }) => <DaySection day={item} setOpen={setOpen} />}
+      ListHeaderComponent={header}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
-        padding: 16,
-        paddingBottom: 5,
-      }}
+      contentContainerStyle={{ paddingBottom: 24 }}
     />
   );
 }

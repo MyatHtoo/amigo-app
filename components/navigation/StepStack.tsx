@@ -8,6 +8,8 @@ import StepSix from "../../app/screens/StepSix";
 import StepConfirm from "../../app/screens/StepConfirm";
 import TripPlan from "../../app/screens/TripPlan";
 import Save from "../../app/screens/Save";
+import TripDetails from "../../app/screens/TripDetails";
+import TripEdit from "../../app/screens/TripEdit";
 
 
 const Stack = createNativeStackNavigator();
@@ -24,6 +26,34 @@ export default function StepStack() {
             <Stack.Screen name="StepConfirm" component={StepConfirm} />
             <Stack.Screen name="TripPlan" component={TripPlan} />
             <Stack.Screen name="Save" component={Save} />
+            <Stack.Screen name="TripDetails" component={TripDetails}
+                options={{
+                    headerShown: true,
+                    headerTitle: "Trip Plans",
+                    headerStyle: {
+                        backgroundColor: "#DBEAFE",
+                    },
+                    headerTintColor: "black",
+                    headerTitleStyle: {
+                        fontSize: 18,
+                        fontWeight: "500",
+                        color: "#0D47A1"
+                    },
+                }} />
+            <Stack.Screen name="TripEdit" component={TripEdit}
+                options={{
+                    headerShown: true,
+                    headerTitle: "Edit Trip Plans",
+                    headerStyle: {
+                        backgroundColor: "#DBEAFE",
+                    },
+                    headerTintColor: "black",
+                    headerTitleStyle: {
+                        fontSize: 18,
+                        fontWeight: "500",
+                        color: "#0D47A1"
+                    },
+                }} />
         </Stack.Navigator>
     );
 }

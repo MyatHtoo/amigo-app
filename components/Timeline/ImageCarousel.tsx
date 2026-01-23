@@ -9,7 +9,7 @@ export default function ImageCarousel({ images }: { images: string[] }) {
   return (
     <View className="mb-3 overflow-hidden rounded-xl">
       <Carousel
-        width={width - 110}
+        width={width}
         height={160}
         autoPlay={images.length > 1}
         autoPlayInterval={3000}
