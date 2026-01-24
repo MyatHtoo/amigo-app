@@ -11,6 +11,7 @@ type Props = {
   iconColor?: string;
   iconSize?: number;
   sign?: string;
+  checked?: boolean;
 };
 
 export default function Button({
@@ -21,47 +22,51 @@ export default function Button({
   iconColor = "#ffffff",
   icon,
   iconSize = 25,
-  sign="",
+  sign = "",
+  checked = false,
 }: Props) {
   return (
-  sign ? (
-    <TouchableOpacity
-      className="items-center justify-center w-10 h-10 rounded-full bg-primary">
-      <Text className="text-2xl font-bold text-white">{sign}</Text>
-    </TouchableOpacity>
-  ) : (
-    <TouchableOpacity
-      onPress={onPress}
-      className={clsx(
-        "rounded-xl flex-row items-center justify-center gap-2",
-        size === "lg" && "w-full h-16",
-        size === "md" && "w-1/2 h-16",
-        size === "sm" && "w-1/3 h-10",
-        variant === "primary" && "bg-primary",
-        variant === "secondary" && "bg-secondary border border-primary"
-      )}
-    >
-      <Text
+    sign ? (
+      <TouchableOpacity
+        className="items-center justify-center w-10 h-10 rounded-full bg-primary">
+        <Text className="text-2xl font-bold text-white">{sign}</Text>
+      </TouchableOpacity>
+    ) : (
+      <TouchableOpacity
+        onPress={onPress}
+        disabled={checked === false}
         className={clsx(
-          "font-semibold",
-          size === "lg" && "text-xl",
-          size === "md" && "text-lg",
-          size === "sm" && "text-base",
-          variant === "primary" && "text-white",
-          variant === "secondary" && "text-black"
+          "rounded-xl flex-row items-center justify-center gap-2",
+          size === "lg" && "w-full h-16",
+          size === "md" && "w-1/2 h-16",
+          size === "sm" && "w-1/3 h-10",
+          variant === "primary" && "bg-primary",
+          variant === "secondary" && "bg-secondary border border-primary",
+          checked === false && "opacity-50"
         )}
       >
-        {title}
-      </Text>
+        <Text
+          className={clsx(
+            "font-semibold",
+            size === "lg" && "text-xl",
+            size === "md" && "text-lg",
+            size === "sm" && "text-base",
+            variant === "primary" && "text-white",
+            variant === "secondary" && "text-black",
+            checked === false && "opacity-50"
+          )}
+        >
+          {title}
+        </Text>
 
-      {icon && (
-        <Ionicons
-          name={icon}
-          size={iconSize}
-          color={iconColor}
-        />
-      )}
-    </TouchableOpacity>
-  )
-);
+        {icon && (
+          <Ionicons
+            name={icon}
+            size={iconSize}
+            color={iconColor}
+          />
+        )}
+      </TouchableOpacity>
+    )
+  );
 }

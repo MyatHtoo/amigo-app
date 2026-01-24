@@ -8,9 +8,22 @@ import { TouchableOpacity } from "react-native";
 
 type Props = {
   accommodation: Accommodation;
+  editable?: boolean;
+  setOpen?: (open: boolean) => void;
+  setEditPayload?: (payload: { title: string; data: any;type: "flight" | "accommodation" | "itinerary" } | null) => void;
 };
 
-export default function AccommodationCard({ accommodation }: Props) {
+export default function AccommodationCard({ accommodation, editable, setOpen, setEditPayload }: Props) {
+
+    const modalContent = (accommodation:string) => {
+    setOpen && setOpen(true);
+    setEditPayload && setEditPayload({
+      type: "accommodation",
+      title: "Edit "+ accommodation,
+      data: "",
+    })
+  }
+
   return (
     <View className="p-4 bg-white shadow-sm rounded-2xl">
       <View className="flex-row items-center gap-2 mb-1">
@@ -21,9 +34,11 @@ export default function AccommodationCard({ accommodation }: Props) {
         <View className="flex-row items-center justify-between flex-1 ">
           <Text className="text-lg font-semibold">Accommodation</Text>
 
-          <TouchableOpacity>
-            <MaterialIcons name="edit" size={26} color="blue" />
-          </TouchableOpacity>
+          {editable &&
+            <TouchableOpacity onPress={() => modalContent('accommodation')}>
+              <MaterialIcons name="edit" size={26} color="blue" />
+            </TouchableOpacity>
+          }
         </View>
 
       </View>

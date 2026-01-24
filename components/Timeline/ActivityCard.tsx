@@ -1,14 +1,29 @@
 import { View, Text, Pressable, Linking, TouchableOpacity } from "react-native";
 import ImageCarousel from "./ImageCarousel";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useState } from "react";
+import { type } from './../constants/types';
 
 type Props = {
   activity: any;
   youtubeLink?: string;
   setOpen?: (open: boolean) => void;
+  editable?: boolean;
+  day?: any;
+  setEditPayload?: (payload: { title: string; data: any;type: "flight" | "accommodation" | "itinerary" } | null) => void;
 };
 
-export default function ActivityCard({ activity, youtubeLink, setOpen }: Props) {
+
+export default function ActivityCard({ day, activity, youtubeLink, setOpen, editable, setEditPayload }: Props) {
+
+  const modalContent = (day: number, time: string) => {
+    setOpen && setOpen(true);
+    setEditPayload && setEditPayload({
+      type: "itinerary",
+      title: "Edit Day " + day + " - " + time,
+      data: "",
+    })
+  }
   return (
     <View className="flex-1 p-4 bg-white border border-gray-200 shadow-sm rounded-2xl">
 
@@ -32,15 +47,16 @@ export default function ActivityCard({ activity, youtubeLink, setOpen }: Props) 
         </Text>
 
         <View className="flex-row items-center gap-3">
-          <TouchableOpacity onPress={() => setOpen && setOpen(true)}>
-            <MaterialIcons name="edit" size={26} color="blue" />
-          </TouchableOpacity>
+          {editable &&
+            <TouchableOpacity onPress={() => modalContent(day.day, activity.time)}>
+              <MaterialIcons name="edit" size={26} color="blue" />
+            </TouchableOpacity>
+          }
 
           {youtubeLink && (
             <Pressable
               onPress={() => Linking.openURL(youtubeLink)}
-              className="px-3 py-1.5 bg-red-600 rounded-full"
-            >
+              className="px-3 py-1.5 bg-red-600 rounded-full">
               <Text className="text-xs font-semibold text-white">
                 ▶ Watch Vlog
               </Text>

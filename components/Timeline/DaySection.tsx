@@ -3,9 +3,11 @@ import ActivityCard from "./ActivityCard";
 
 type Props = {
   setOpen: (open: boolean) => void;
+  editable?: boolean;
+  setEditablePayload?: (payload: { title: string; data: any } | null) => void;
 };
 
-export default function DaySection({ day, setOpen }: { day: any; setOpen: (open: boolean) => void } & Props) {
+export default function DaySection({ day, setOpen, editable, setEditPayload }: { day: any; setOpen: (open: boolean) => void } & Props) {
   return (
     <View className="p-3 mb-1">
       {/* Day Header */}
@@ -32,6 +34,9 @@ export default function DaySection({ day, setOpen }: { day: any; setOpen: (open:
           </View>
 
           <ActivityCard
+            setEditPayload={setEditPayload}
+            day={day}
+            editable={editable}
             setOpen={setOpen}
             activity={activity}
             youtubeLink={day.youtube_vlog_link}

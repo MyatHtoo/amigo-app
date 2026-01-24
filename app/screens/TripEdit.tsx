@@ -8,17 +8,26 @@ import EditModal from "../../components/Modal/EditModal";
 import { useState } from "react";
 import { Text } from "react-native";
 
+type EditPayload = {
+    type:  "flight" | "accommodation" | "itinerary";
+    title: string;
+    data: any;
+};
+
 export default function TripEdit() {
     const [open, setOpen] = useState(false);
-    console.log(open)
+    const [editPayload, setEditPayload] = useState<EditPayload | null>(null);
+
     const toggle = () => {
-       setOpen(prev => !prev);
+        setOpen(prev => !prev);
     }
-    const title = "Edit Item";
+
     return (
         <View className="flex-1">
             <ItineraryTimeline
+                setEditPayload={setEditPayload}
                 setOpen={setOpen}
+                editable
                 itinerary={itineraryData.itinerary}
                 header={
                     <View className="px-4 pt-2">
@@ -29,17 +38,16 @@ export default function TripEdit() {
 
                         <View className="h-4" />
 
-                        <FlightsSection flights={data.flights} setOpen={setOpen} />
+                        <FlightsSection editable setEditPayload={setEditPayload} flights={data.flights} setOpen={setOpen} />
 
                         <View className="h-4" />
 
-                        <AccommodationCard accommodation={data.accommodation} setOpen={setOpen} />
-
+                        <AccommodationCard setEditPayload={setEditPayload} editable accommodation={data.accommodation} setOpen={setOpen} />
                         <View className="h-6" />
                     </View>
                 }
             />
-            {open  && <EditModal flights={data.flights} setOpen={setOpen} open={open} title={title}/>}
+            {open && <EditModal flights={data.flights} setOpen={setOpen} open={open} editPayload={editPayload} />}
         </View>
 
     )

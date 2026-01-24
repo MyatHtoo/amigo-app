@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Feather from '@expo/vector-icons/Feather';
 import type { SingleFlight } from "../constants/types";
@@ -8,9 +8,22 @@ type Props = {
   flight: SingleFlight;
   label: "Departure" | "Return";
   condition?: "details" | "update";
+  editable?: boolean;
+  setEditPayload?: (payload: { title: string; data: any;type: "flight" | "accommodation" | "itinerary" } | null) => void;
+  setOpen?: (open: boolean) => void;
 };
 
-export default function FlightCard({ flight, label,condition }: Props) {
+export default function FlightCard({ flight, label,condition, editable,setEditPayload,setOpen }: Props) {
+
+     const modalContent = (flight:string) => {
+    setOpen && setOpen(true);
+    setEditPayload && setEditPayload({
+      type: "flight",
+      title: "Edit "+ flight,
+      data: "",
+    })
+  }
+
   return (
     <View className={clsx("p-4 mb-3  shadow-sm rounded-2xl",
       condition === "details" && "bg-white" ,
@@ -36,7 +49,11 @@ export default function FlightCard({ flight, label,condition }: Props) {
               day: "numeric"
             })}
           </Text>
+          {editable && 
+          <TouchableOpacity onPress={() => modalContent(label.toLowerCase())}>
           <MaterialIcons name="edit" size={26} color="blue" />
+          </TouchableOpacity>
+           }
         </View>
       </View>
 
@@ -48,15 +65,17 @@ export default function FlightCard({ flight, label,condition }: Props) {
 
 
       {/* AIRLINE */}
-      <View className="flex-row items-center gap-2 mt-1">
+      <View className="flex-row items-center gap-2 mt-1 ">
         <Image
           source={{ uri: flight.airline_logo }}
           className="w-6 h-6"
           resizeMode="contain"
         />
-        <Text className="text-gray-600">
+       <View style={{ flex: 1 }}>
+         <Text className="text-gray-600">
           {flight.airline} • {flight.flight_number}
         </Text>
+       </View>
       </View>
 
       {/* TIMES & PRICE */}
