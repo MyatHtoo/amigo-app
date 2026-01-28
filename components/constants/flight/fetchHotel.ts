@@ -6,7 +6,7 @@ export async function fetchHotels(trip: TripState) {
 
   try {
     const res = await axios.get(
-      "http://172.25.116.112:4000/api/hotels?",
+      "https://amigo-backend-s327.onrender.com/api/hotels?",
       {
         params: {
           destination: trip.destination,    

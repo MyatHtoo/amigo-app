@@ -11,7 +11,7 @@ export async function fetchFlights(params: {
   try {
 
     const res = await axios.get(
-      "http://172.25.116.112:4000/api/flights?",
+      "https://amigo-backend-s327.onrender.com/api/flights?",
       {
         params: {
           origin: params.origin,
