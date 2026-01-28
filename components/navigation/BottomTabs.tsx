@@ -7,6 +7,8 @@ import { Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Plan from "../../app/screens/Plan";
 import GoogleAuth from "../../app/screens/Google";
+import Home from "../../app/Home";
+import Settings from "../../app/screens/Settings";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,6 +20,7 @@ export default function BottomTabs() {
     const navigation = useNavigation();
     return (
         <Tab.Navigator
+            initialRouteName="Home"
             screenOptions={{
                 headerShown: false,
                 tabBarActiveTintColor: "#2563EB",
@@ -26,12 +29,38 @@ export default function BottomTabs() {
             }}>
 
             <Tab.Screen
-                name="Notification"
-                component={GoogleAuth}
+                name="Home"
+                component={Home}
                 options={{
-                    tabBarIcon: ({ focused }) => (
-                        <Ionicons name="notifications-outline" size={22} />
+                    tabBarIcon: ({ focused, color, size }) => (
+                        <Ionicons
+                            name="home-outline"
+                            size={focused ? size + 2 : size}
+                            color={color}
+                        />
                     ),
+                    tabBarLabel: ({ focused, color }) => (
+                        <Text
+                            style={{
+                                color,
+                                fontSize: focused ? 13 : 12,
+                                fontWeight: focused ? "600" : "400",
+                            }}>
+                            Home
+                        </Text>
+                    ),
+                    headerShown: true,
+                    headerTitle: "Home",
+                    headerStyle: {
+                        backgroundColor: "#DBEAFE",
+                        height: 80,
+                    },
+                    headerTintColor: "#fff",
+                    headerTitleStyle: {
+                        fontSize: 18,
+                        fontWeight: "500",
+                        color: "#0D47A1"
+                    },
                 }} />
 
             <Tab.Screen
@@ -66,7 +95,6 @@ export default function BottomTabs() {
                         fontSize: 18,
                         fontWeight: "500",
                         color: "#0D47A1",
-                        marginLeft: 15,
                     },
                 }}
             />
@@ -112,15 +140,14 @@ export default function BottomTabs() {
                     headerTitleStyle: {
                         fontSize: 18,
                         fontWeight: "500",
-                        color: "#0D47A1",
-                        marginLeft: 15,
+                        color: "#0D47A1"
                     },
                 }}
             />
 
             <Tab.Screen
                 name="Setting"
-                component={EmptyScreen}
+                component={Settings}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
                         <Ionicons
@@ -151,7 +178,6 @@ export default function BottomTabs() {
                         fontSize: 18,
                         fontWeight: "500",
                         color: "#0D47A1",
-                        marginLeft: 15,
                     },
                 }}
             />

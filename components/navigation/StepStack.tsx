@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 
 export default function StepStack() {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+         <Stack.Navigator initialRouteName="StepOne" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="StepOne" component={StepOne} />
             <Stack.Screen name="StepTwo" component={StepTwo} />
             <Stack.Screen name="StepThree" component={StepThree} />
