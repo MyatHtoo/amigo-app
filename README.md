@@ -1,6 +1,6 @@
 # Amigo App
 
-Hello GitHub Copilot! 👋
+Hello!👋
 
 A comprehensive travel planning application built with React Native and Expo, designed to help users plan, organize, and manage their trips with ease.
 
